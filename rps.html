@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html></html>
+
+<script>
+let playerScore = 0;
+let computerScore = 0;
+let roundCount = 0;
+
+// Randomly generate the computer's play
+function getComputerSelection () {
+    const computerOptions = ["rock", "paper", "scissors"];
+    return computerOptions[Math.floor(Math.random()*3)];
+}
+
+// Prompt the player for their response
+function getPlayerSelection() {
+    return prompt("Rock, paper, or scissors?").toLowerCase();
+}
+
+// Keep score and determine winner
+function game () {
+    while (roundCount < 5) {
+        playRound(getPlayerSelection(), getComputerSelection());
+        if (playerScore == 3) {
+            return "Great job! You beat the computer.";
+        } else if (computerScore == 3) {
+            return "The computer won. Better luck next time.";
+        }
+    }
+}
+
+// play a single round
+function playRound (playerSelection, computerSelection) {
+    // player wins
+    if (playerSelection == "rock" && computerSelection == "scissors" ||
+        playerSelection == "paper" && computerSelection == "rock" ||
+        playerSelection == "scissors" && computerSelection == "paper")  {
+        ++playerScore;
+        ++roundCount;
+        alert("You win! " + playerSelection + " beats " + computerSelection);
+    }
+    // computer wins
+    else if (computerSelection == "rock" && playerSelection == "scissors" || 
+            computerSelection == "paper" && playerSelection == "rock" || 
+            computerSelection == "scissors" && playerSelection == "paper")  {
+        ++computerScore;
+        ++roundCount;
+        alert("You lose. " + computerSelection + " beats " + playerSelection);
+    }
+    // Draw
+    else {
+        return "It\'s a draw. Try again."
+    }
+}
+</script>
